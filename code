@@ -1,1 +1,195 @@
+codes = {'T-shirt': '0', 'Trousers': '1', 'Scarf': '2', 'Smartphone': '3', 'iPad': '4', 'Laptop': '5', 'Eggs': '6', 'Chocolate': '7', 'Juice': '8', 'Milk': '9'}
+prices = {'T-shirt': 500, 'Trousers': 600, 'Scarf': 250, 'Smartphone': 20000, 'iPad': 30000, 'Laptop': 50000, 'Eggs': 5, 'Chocolate': 10, 'Juice': 100, 'Milk': 45}
+
+
+def show_menu():
+   return '''=================================================
+                   MY BAZAAR
+=================================================
+Hello! Welcome to my grocery store!
+Following are the products available in the shop:
+
+-------------------------------------------------
+CODE | DESCRIPTION |   CATEGORY   | COST (Rs)
+-------------------------------------------------
+  0  | T-shirt     | Apparels     | 500
+  1  | Trousers    | Apparels     | 600
+  2  | Scarf       | Apparels     | 250
+  3  | Smartphone  | Electronics  | 20,000
+  4  | iPad        | Electronics  | 30,000
+  5  | Laptop      | Electronics  | 50,000
+  6  | Eggs        | Eatables     | 5
+  7  | Chocolate   | Eatables     | 10
+  8  | Juice       | Eatables     | 100
+  9  | Milk        | Eatables     | 45
+------------------------------------------------
+'''
+
+
+
+def get_regular_input():
+    print('''-------------------------------------------------
+ENTER ITEMS YOU WISH TO BUY
+-------------------------------------------------''')
+    regular_input = input('Enter the item codes (space-separated): ')
+    global regular_input_list
+    regular_input_list = regular_input.split()
+    regular_input_list.sort()
+
+
+
+
+
+
+
+def get_bulk_input():
+    print('''-------------------------------------------------
+ENTER ITEM AND QUANTITIES
+-------------------------------------------------''')
+    tag = 0
+    while tag == 0:
+        bulk_input = int(input('Enter code and quantity (leave blank to stop): '))
+        global bulk_input_list
+        bulk_input_list = bulk_input.split(maxsplit=1)
+        bulk_input_list.sort()
+
+        if bulk_input == '':
+            tag += 1
+            return 'Your order has been finalized.'
+        elif bulk_input[0] > 9 or bulk_input[2:len(bulk_input)] < 0:
+            tag = 0
+            return 'Invalid quantity. Try again.'
+
+
+
+
+
+
+def print_order_details(quantities):
+    '''
+    Description: Prints the details of the order in a manner similar to the
+    sample given in PDF.
+
+    Parameters: Takes a list of integers of length 10, where the i_th
+    element represents the quantity of the item with item code i.
+
+    Returns: No return value
+    '''
+    pass  # Remove this line when you write this function
+
+
+def calculate_category_wise_cost(quantities):
+    '''
+    Description: Calculates the category wise cost using the quantities
+    provided. Include appropriate print statements to match the output with the
+    screenshot provided in the PDF.
+
+    Parameters: Takes a list of integers of length 10, where the i_th
+    element represents the quantity of the item with item code i.
+
+    Returns: A 3-tuple of integers in the following format:
+    (apparels_cost, electronics_cost, eatables_cost)
+    '''
+    pass  # Remove this line when you write this function
+
+
+def get_discount(cost, discount_rate):
+    print('''-------------------------------------------------
+DISCOUNTS
+-------------------------------------------------''')
+
+
+
+def calculate_discounted_prices(apparels_cost, electronics_cost, eatables_cost):
+    '''
+    Description: Calculates the discounted category-wise price, if applicable.
+    Include appropriate print statements to match the output with the
+    screenshot provided in the PDF.
+
+    Parameters: Takes 3 integer parameters:
+    - apparels_cost: 	cost for the category 'Apparels'
+    - electronics_cost: cost for the category 'Electronics'
+    - eatables_cost: 	cost for the category 'Eatables'
+
+    Returns: A 3-tuple of integers in the following format:
+    (discounted_apparels_cost, discounted_electronics_cost, discounted_eatables_cost).
+    '''
+    pass  # Remove this line when you write this function
+
+
+def get_tax(cost, tax):
+    '''
+    Description: This is a helper function. DO NOT CHANGE THIS.
+    This function must be used whenever you are calculating discounts.
+
+    Parameters: Takes 2 parameters:
+    - cost: Integer
+    - tax: 	Float: 0 <= tax <= 1
+
+    Returns: The tax on the cost provided.
+    '''
+    return int(cost * tax)
+
+
+def calculate_tax(apparels_cost, electronics_cost, eatables_cost):
+    '''
+    Description: Calculates the total cost including taxes.
+    Include appropriate print statements to match the output with the
+    screenshot provided in the PDF.
+
+    Parameters: Takes 3 integer parameters:
+    - apparels_cost: 	cost for the category 'Apparels'
+    - electronics_cost: cost for the category 'Electronics'
+    - eatables_cost: 	cost for the category 'Eatables'
+
+    Returns: A 2-tuple of integers in the following format:
+    (total_cost_including_tax, total_tax)
+    '''
+    pass  # Remove this line when you write this function
+
+
+def apply_coupon_code(total_cost):
+    print('''-------------------------------------------------
+COUPON CODE
+-------------------------------------------------''')
+    tag = 0
+    while tag == 0:
+        coupon_code = input('Enter coupon code (else leave blank): ')
+        if coupon_code == 'CHILL50':
+            tag += 1
+            global total_cost
+            print(f'[CHILL50] min(10000,{total_cost} * 0.50)')
+            coupon_discount = total_cost*0.50
+            new_total = total_cost - coupon_discount
+            print('TOTAL COUPON DISCOUNT =', coupon_discount)
+            print('TOTAL COST =', new_total)
+
+
+
+def main():
+    print(show_menu())
+    tag = 0
+    while tag == 0:
+        user_input = input('Would you like to buy in bulk? (y or Y / n or N): ')
+        if user_input.upper() == 'Y':
+            get_bulk_input()
+            tag += 1
+        elif user_input.upper() == 'N':
+            get_regular_input()
+            tag += 1
+        else:
+            tag = 0
+    print_order_details()
+    calculate_category_wise_cost()
+    get_discount()
+    calculate_discounted_prices()
+    get_tax()
+    calculate_tax()
+    apply_coupon_code()
+    print('Thank you for visiting!')
+
+
+
+if __name__ == '__main__':
+    main()
 
