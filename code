@@ -1,7 +1,3 @@
-codes = {'T-shirt': '0', 'Trousers': '1', 'Scarf': '2', 'Smartphone': '3', 'iPad': '4', 'Laptop': '5', 'Eggs': '6', 'Chocolate': '7', 'Juice': '8', 'Milk': '9'}
-prices = {'T-shirt': 500, 'Trousers': 600, 'Scarf': 250, 'Smartphone': 20000, 'iPad': 30000, 'Laptop': 50000, 'Eggs': 5, 'Chocolate': 10, 'Juice': 100, 'Milk': 45}
-
-
 def show_menu():
    return '''=================================================
                    MY BAZAAR
@@ -35,11 +31,29 @@ ENTER ITEMS YOU WISH TO BUY
     global regular_input_list
     regular_input_list = regular_input.split()
     regular_input_list.sort()
-
-
-
-
-
+    global regular_input_quantities
+    regular_input_quantities = [0,0,0,0,0,0,0,0,0,0]
+    for i in range(len(regular_input_list)):
+        if regular_input_list[i] == '0':
+            regular_input_quantities[0] += 1
+        elif regular_input_list[i] == '1':
+            regular_input_quantities[1] += 1
+        elif regular_input_list[i] == '2':
+            regular_input_quantities[2] += 1
+        elif regular_input_list[i] == '3':
+            regular_input_quantities[3] += 1
+        elif regular_input_list[i] == '4':
+            regular_input_quantities[4] += 1
+        elif regular_input_list[i] == '5':
+            regular_input_quantities[5] += 1
+        elif regular_input_list[i] == '6':
+            regular_input_quantities[6] += 1
+        elif regular_input_list[i] == '7':
+            regular_input_quantities[7] += 1
+        elif regular_input_list[i] == '8':
+            regular_input_quantities[8] += 1
+        elif regular_input_list[i] == '9':
+            regular_input_quantities[9] += 1
 
 
 def get_bulk_input():
@@ -61,91 +75,104 @@ ENTER ITEM AND QUANTITIES
             return 'Invalid quantity. Try again.'
 
 
-
-
-
-
 def print_order_details(quantities):
-    '''
-    Description: Prints the details of the order in a manner similar to the
-    sample given in PDF.
-
-    Parameters: Takes a list of integers of length 10, where the i_th
-    element represents the quantity of the item with item code i.
-
-    Returns: No return value
-    '''
-    pass  # Remove this line when you write this function
+    print('''-------------------------------------------------
+ORDER DETAILS
+------------------------------------------------- 
+    ''')
+    n = 1
+    if quantities[0] > 0:
+        print('[',n,'] T-shirt x ',quantities[0],' = Rs 500 *',quantities[0],'=',quantities[0]*500)
+        n += 1
+    if quantities[1] > 0:
+        print('[',n,'] Trousers x ',quantities[1],' = Rs 600 * ',quantities[1], ' = Rs', quantities[1]*600)
+        n += 1
+    if quantities[2] > 0:
+        print('[', n, ']', ' Scarf x ',quantities[2], '= Rs 250 * ',quantities[2], ' = Rs',quantities[2]*250)
+        n += 1
+    if quantities[3] > 0:
+        print('[', n, ']', ' Smartphone x ',quantities[3], '= Rs 20000 * ',quantities[3], ' = Rs',quantities[3]*20000)
+        n += 1
+    if quantities[4] > 0:
+        print('[', n, ']', ' iPad x ',quantities[4], '= Rs 30000 * ',quantities[4], ' = Rs', quantities[4]*30000)
+        n += 1
+    if quantities[5] > 0:
+        print('[', n, ']', ' Laptop x ',quantities[5], '= Rs 50000 * ',quantities[5], ' = Rs', quantities[5]*50000)
+        n += 1
+    if quantities[6] > 0:
+        print('[', n, ']', ' Eggs x ',quantities[6], '= Rs 5 * ',quantities[6], ' = Rs', quantities[6]*5)
+        n += 1
+    if quantities[7] > 0:
+        print('[', n, ']', ' Chocolate x ',quantities[7], '= Rs 10 * ',quantities[7], ' = Rs', quantities[7]*10)
+        n += 1
+    if quantities[8] > 0:
+        print('[', n, ']', ' Juice x ',quantities[8], '= Rs 100 * ',quantities[8], ' = Rs', quantities[8]*100)
+        n += 1
+    if quantities[9] > 0:
+        print('[', n, ']', ' Milk x ',quantities[9], '= Rs 45 * ',quantities[9], ' = Rs', quantities[9]*45)
+        n += 1
 
 
 def calculate_category_wise_cost(quantities):
-    '''
-    Description: Calculates the category wise cost using the quantities
-    provided. Include appropriate print statements to match the output with the
-    screenshot provided in the PDF.
-
-    Parameters: Takes a list of integers of length 10, where the i_th
-    element represents the quantity of the item with item code i.
-
-    Returns: A 3-tuple of integers in the following format:
-    (apparels_cost, electronics_cost, eatables_cost)
-    '''
-    pass  # Remove this line when you write this function
+    print('''-------------------------------------------------
+CATEGORY-WISE COST
+-------------------------------------------------''')
+    if quantities[0] > 0 or quantities[1] > 0 or quantities[2] > 0:
+        apparels_cost = int(500*quantities[0] + 600*quantities[1] + 250*quantities[3])
+        print('Apparels = ',apparels_cost)
+    if quantities[3] > 0 or quantities[4] > 0 or quantities[5] > 0:
+        electronics_cost = int(20000*quantities[3] + 30000*quantities[4] + 50000*quantities[5])
+        print('Electronics = ',electronics_cost)
+    if quantities[6] > 0 or quantities[7] > 0 or quantities[8] > 0 or quantities[9] > 0:
+        eatables_cost = int(5*quantities[6] + 10*quantities[7] + 100*quantities[8] + 45*quantities[9])
+        print('Eatables =', eatables_cost)
 
 
 def get_discount(cost, discount_rate):
-    print('''-------------------------------------------------
-DISCOUNTS
--------------------------------------------------''')
+    return int(cost*discount_rate)
 
 
 
 def calculate_discounted_prices(apparels_cost, electronics_cost, eatables_cost):
-    '''
-    Description: Calculates the discounted category-wise price, if applicable.
-    Include appropriate print statements to match the output with the
-    screenshot provided in the PDF.
-
-    Parameters: Takes 3 integer parameters:
-    - apparels_cost: 	cost for the category 'Apparels'
-    - electronics_cost: cost for the category 'Electronics'
-    - eatables_cost: 	cost for the category 'Eatables'
-
-    Returns: A 3-tuple of integers in the following format:
-    (discounted_apparels_cost, discounted_electronics_cost, discounted_eatables_cost).
-    '''
-    pass  # Remove this line when you write this function
+    print('''-------------------------------------------------
+    DISCOUNTS
+    -------------------------------------------------''')
+    if apparels_cost > 2000:
+        discount = apparels_cost*0.10
+        print('[APPAREL] ', f'Rs {apparels_cost} - Rs {discount} = ','Rs ',apparels_cost-discount)
+    elif electronics_cost >= 25000:
+        discount = electronics_cost*0.10
+        print('[ELECTRONICS] ',f'Rs{electronics_cost} - Rs{discount} = ','Rs ',electronics_cost-discount)
+    elif eatables_cost >= 500:
+        discount = eatables_cost*0.10
+        print('[EATABLES] ',f'Rs{eatables_cost} - Rs{discount} = ','Rs ',eatables_cost-discount)
+    global cost #cost is sum of all categories' cost
+    total_discount = int(cost*0.10)
+    total_cost = int(cost*(1 - 0.10))
+    print('TOTAL DISCOUNT = ', total_discount)
+    print('TOTAL COST = ', total_cost)
 
 
 def get_tax(cost, tax):
-    '''
-    Description: This is a helper function. DO NOT CHANGE THIS.
-    This function must be used whenever you are calculating discounts.
-
-    Parameters: Takes 2 parameters:
-    - cost: Integer
-    - tax: 	Float: 0 <= tax <= 1
-
-    Returns: The tax on the cost provided.
-    '''
     return int(cost * tax)
 
 
 def calculate_tax(apparels_cost, electronics_cost, eatables_cost):
-    '''
-    Description: Calculates the total cost including taxes.
-    Include appropriate print statements to match the output with the
-    screenshot provided in the PDF.
-
-    Parameters: Takes 3 integer parameters:
-    - apparels_cost: 	cost for the category 'Apparels'
-    - electronics_cost: cost for the category 'Electronics'
-    - eatables_cost: 	cost for the category 'Eatables'
-
-    Returns: A 2-tuple of integers in the following format:
-    (total_cost_including_tax, total_tax)
-    '''
-    pass  # Remove this line when you write this function
+    print('''-------------------------------------------------
+TAX
+-------------------------------------------------''')
+    if apparels_cost > 0:
+        apparels_tax = apparels_cost*0.10
+        print('[APPAREL] ', f'{apparels_cost} * 0.10 = Rs ', apparels_tax)
+    elif electronics_cost > 0:
+        electronics_tax = electronics_cost*0.15
+        print('[ELECTRONICS] ', f'{electronics_cost} * 0.15 = Rs ', electronics_tax)
+    elif eatables_cost > 0:
+        eatables_tax = eatables_cost*0.05
+        print('[EATABLES] ', f'{eatables_cost} * 0.05 = Rs ',eatables_tax)
+    total_tax = apparels_tax + electronics_tax +  eatables_tax
+    global total_cost
+    total_cost += total_tax
 
 
 def apply_coupon_code(total_cost):
@@ -159,11 +186,14 @@ COUPON CODE
             tag += 1
             global total_cost
             print(f'[CHILL50] min(10000,{total_cost} * 0.50)')
-            coupon_discount = total_cost*0.50
+            coupon_discount = total_cost * 0.50
             new_total = total_cost - coupon_discount
             print('TOTAL COUPON DISCOUNT =', coupon_discount)
             print('TOTAL COST =', new_total)
-
+        elif coupon_code == '':
+            tag += 1
+        else:
+            print('Invalid coupon code. Try again.')
 
 
 def main():
@@ -181,15 +211,14 @@ def main():
             tag = 0
     print_order_details()
     calculate_category_wise_cost()
-    get_discount()
+    # cost = electronics_cost + eatables_cost + apparels_cost
     calculate_discounted_prices()
-    get_tax()
-    calculate_tax()
-    apply_coupon_code()
+    # for all cost individually
+    calculate_tax(apparels_cost, electronics_cost, eatables_cost)
+    apply_coupon_code(total_cost)
     print('Thank you for visiting!')
 
 
 
 if __name__ == '__main__':
     main()
-
